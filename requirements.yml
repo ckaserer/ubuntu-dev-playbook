@@ -1,0 +1,7 @@
+---
+roles: []
+  # - ckaserer.bashrc
+
+collections:
+  - name: community.general
+...

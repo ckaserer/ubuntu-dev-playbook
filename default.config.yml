@@ -1,0 +1,289 @@
+user: vagrant
+
+gnome_themes:
+  - name: WhiteSur-gtk-theme
+    repo: https://github.com/vinceliuice/WhiteSur-gtk-theme.git
+    dest: /usr/share/themes/source/WhiteSur-gtk-theme
+  - name: WhiteSur-kde
+    repo: https://github.com/vinceliuice/WhiteSur-kde.git
+    dest: /usr/share/themes/source/WhiteSur-kde
+  - name: WhiteSur-icon-theme
+    repo: https://github.com/vinceliuice/WhiteSur-icon-theme.git
+    dest: /usr/share/themes/source/WhiteSur-icon-theme
+
+gnome_extensions:
+  
+  # # no title bar
+  # - src: https://extensions.gnome.org/extension-data/no-title-bar%40franglais125.gmail.com.v9.shell-extension.zip
+  #   uuid: no-title-bar@franglais125.gmail.com
+  #   schema: true
+  #   setting: no-title-bar
+  #   config: []
+
+  # global application menu
+  - src: https://extensions.gnome.org/extension-data/GnomeGlobalAppMenu_fix_lestcape.v1.shell-extension.zip
+    uuid: GnomeGlobalAppMenu_fix_@lestcape
+    schema: true
+    setting: global-application-menu
+    config: []
+
+  # dash to dock
+  - src: https://extensions.gnome.org/extension-data/dash-to-dockmicxgx.gmail.com.v69.shell-extension.zip
+    uuid: dash-to-dock@micxgx.gmail.com
+    schema: true
+    setting: dash-to-dock
+    config:
+      - key: preferred-monitor
+        value: '0'
+      - key: dock-fixed
+        value: 'false'
+      - key: autohide
+        value: 'true'
+      - key: autohide-in-fullscreen
+        value: 'true'
+      - key: require-pressure-to-show
+        value: 'false'
+      - key: intellihide
+        value: 'false'
+      - key: height-fraction
+        value: '1.0'
+      - key: dash-max-icon-size
+        value: '32'
+      - key: extend-height
+        value: 'false'
+      - key: show-show-apps-button
+        value: 'false'
+      - key: animate-show-apps
+        value: 'false'
+      - key: click-action
+        value: 'focus-or-previews'
+      - key: custom-theme-shrink
+        value: 'true'
+      - key: running-indicator-style
+        value: 'DOTS'
+      - key: custom-theme-customize-running-dots
+        value: 'true'
+      - key: custom-theme-running-dots-color
+        value: '#8caad5'
+      - key: custom-background-color
+        value: 'true'
+      - key: background-color
+        value: '#000000'
+      - key: transparency-mode
+        value: 'FIXED'
+      - key: background-opacity
+        value: '0.2'
+  
+  # auto move windows
+  - src: https://extensions.gnome.org/extension-data/auto-move-windowsgnome-shell-extensions.gcampax.github.com.v43.shell-extension.zip
+    uuid: auto-move-windows@gnome-shell-extensions.gcampax.github.com
+    schema: true
+    setting: auto-move-windows
+    config: []
+
+  # move clock
+  - src: https://extensions.gnome.org/extension-data/Move_Clockrmy.pobox.com.v22.shell-extension.zip
+    uuid: Move_Clock@rmy.pobox.com
+    schema: true
+    setting: move-clock
+    config: []
+
+  # hide activities
+  - src: https://extensions.gnome.org/extension-data/Hide_Activitiesshay.shayel.org.v10.shell-extension.zip
+    uuid: Hide_Activities@shay.shayel.org
+    schema: true
+    setting: hide-activities
+    config: []
+
+  # panel OSD
+  - src: https://extensions.gnome.org/extension-data/panel-osdberend.de.schouwer.gmail.com.v39.shell-extension.zip
+    uuid: panel-osd@berend.de.schouwer.gmail.com
+    schema: true
+    setting: panel-osd
+    config:
+      - key: x-pos
+        value: '100.0'
+      - key: y-pos
+        value: '100.0'
+
+  # laces menu
+  - src: https://extensions.gnome.org/extension-data/places-menugnome-shell-extensions.gcampax.github.com.v47.shell-extension.zip
+    uuid: laces-menu@gnome-shell-extensions.gcampax.github.com
+    schema: true
+    setting: laces-menu
+    config: []
+
+  # refresh wifi
+  - src: https://extensions.gnome.org/extension-data/refresh-wifikgshank.net.v14.shell-extension.zip
+    uuid: refresh-wifi@kgshank.net
+    schema: true
+    setting: refresh-wifi
+    config: []
+
+  # remove dropdown arrows
+  - src: https://extensions.gnome.org/extension-data/remove-dropdown-arrowsmpdeimos.com.v13.shell-extension.zip
+    uuid: remove-dropdown-arrows@mpdeimos.com
+    schema: true
+    setting: remove-dropdown-arrows
+    config: []
+  
+  # status area horizontal spacing
+  - src: https://extensions.gnome.org/extension-data/status-area-horizontal-spacingmathematical.coffee.gmail.com.v15.shell-extension.zip
+    uuid: status-area-horizontal-spacing@mathematical.coffee.gmail.com
+    schema: true
+    setting: status-area-horizontal-spacing
+    config:
+      - key: hpadding 
+        value: '5'
+
+  # steal my focus
+  - src: https://extensions.gnome.org/extension-data/steal-my-focus%40kagesenshi.org.v4.shell-extension.zip
+    uuid: steal-my-focus@kagesenshi.org
+    schema: true
+    setting: steal-my-focus
+    config: []
+  
+  # workspaces to dock
+  - src: https://extensions.gnome.org/extension-data/workspaces-to-dockpassingthru67.gmail.com.v53.shell-extension.zip
+    uuid: workspaces-to-dock@passingthru67.gmail.com
+    schema: true
+    setting: workspaces-to-dock
+    config:
+      - key: dock-position
+        value: 'TOP'
+      - key: opaque-background
+        value: 'false'
+      - key: dock-fixed
+        value: 'false'
+      - key: autohide
+        value: 'false'
+      - key: intellihide
+        value: 'false'
+      - key: workspace-captions
+        value: 'false'
+      - key: customize-height
+        value: 'true'
+      - key: center-thumbnails-on-dock
+        value: 'true'
+      - key: top-margin
+        value: '0.1'
+      - key: bottom-margin
+        value: '0.1'
+  
+  # hidetopbar
+  - src: https://extensions.gnome.org/extension-data/hidetopbarmathieu.bidon.ca.v80.shell-extension.zip
+    uuid: hidetopbar@mathieu.bidon.ca
+    schema: true
+    setting: hidetopbar
+    config:
+      - key: mouse-sensitive
+        value: 'true'
+      - key: mouse-sensitive-fullscreen-window
+        value: 'true'
+      - key: enable-intellihide
+        value: 'true'
+      - key: enable-active-window
+        value: 'false'
+    
+  # activities-config
+  - src: https://extensions.gnome.org/extension-data/activities-confignls1729.v89.shell-extension.zip
+    uuid: activities-config@nls1729
+    schema: true
+    setting: activities-config
+    config:
+      - key: activities-config-button-icon-path
+        value: '~/Pictures/.activities/icon.png'
+      - key: activities-icon-scale-factor
+        value: '1.6'
+      - key: activities-icon-padding
+        value: '0'
+      - key: activities-config-button-no-text
+        value: 'true'
+      - key: panel-hide-app-menu-button-icon
+        value: 'true'
+
+  # topicons
+  - src: https://extensions.gnome.org/extension-data/TopIconsphocean.net.v27.shell-extension.zip
+    uuid: TopIcons@phocean.net
+    schema: true
+    setting: topicons
+    config: []
+
+  # sound-output-device-chooser
+  - src: https://extensions.gnome.org/extension-data/sound-output-device-chooserkgshank.net.v32.shell-extension.zip
+    uuid: sound-output-device-chooser@kgshank.net
+    schema: true
+    setting: sound-output-device-chooser
+    config: []
+
+  # screenshot
+  - src: https://extensions.gnome.org/extension-data/gnome-shell-screenshotttll.de.v52.shell-extension.zip
+    uuid: gnome-shell-screenshot@ttll.de
+    schema: true
+    setting: screenshot
+    config:
+      - key: save-screenshot
+        value: 'true'
+      - key: clipboard-action
+        value: 'set-image-data'
+      - key: enable-indicator
+        value: 'false'
+
+  ###############################
+  # Extensions with idicator
+  # Order relevant for top bar
+  ###############################
+  
+  # apt update indicator 
+  - src: https://extensions.gnome.org/extension-data/apt-update-indicatorfranglais125.gmail.com.v22.shell-extension.zip
+    uuid: apt-update-indicator@franglais125.gmail.com
+    schema: true
+    setting: apt-update-indicator
+    config:
+     - key: interval-unit
+       value: 'hours'
+     - key: check-interval
+       value: '4'
+     - key: notify
+       value: 'true'
+     - key: verbosity
+       value: '1'
+     - key: update-cmd-options
+       value: 'custom'
+     - key: use-custom-cmd
+       value: 'true'
+     - key: update-cmd
+       value: "'sudo pkexec apt upgrade -y'"
+
+  # fqmegh
+  - src: https://extensions.gnome.org/extension-data/fqmegh.v15.shell-extension.zip
+    uuid: fq@megh
+    schema: true
+    setting: fqmegh
+    config: []
+  
+  # caffeine
+  - src: https://extensions.gnome.org/extension-data/caffeinepatapon.info.v37.shell-extension.zip
+    uuid: caffeine@patapon.info
+    schema: true
+    setting: caffeine
+    config:
+      - key: enable-fullscreen
+        value: 'false'
+      - key: show-notifications
+        value: 'false'
+
+  # freon
+  - src: https://extensions.gnome.org/extension-data/freonUshakovVasilii_Github.yahoo.com.v43.shell-extension.zip
+    uuid: freon@UshakovVasilii_Github.yahoo.com
+    schema: true
+    setting: freon
+    config: []
+
+  # netspeed
+  - src: https://extensions.gnome.org/extension-data/netspeedhedayaty.gmail.com.v31.shell-extension.zip
+    uuid: netspeed@hedayaty.gmail.com
+    schema: true
+    setting: netspeed
+    config: []
+

@@ -1,0 +1,86 @@
+---
+- name: Install dependecies
+  apt: 
+    name:
+      - sassc 
+      - optipng 
+      - inkscape 
+      - libglib2.0-dev-bin 
+      
+- name: Download gnome themes
+  git:
+    repo: "{{ theme.repo }}"
+    dest: "{{ theme.dest }}"
+  loop_control:
+    loop_var: theme
+    label: "{{ theme.name }}"
+  with_items: "{{ gnome_themes }}"
+  register: gnome_theme_download
+
+- name: Enable extensions required for gnome theme
+  shell: "gsettings set org.gnome.shell enabled-extensions \"$(gsettings get org.gnome.shell enabled-extensions | sed s/.$//), '{{ extension }}']\""
+  become: true
+  become_user: "{{ user }}"
+  loop_control:
+    loop_var: extension
+  with_items:
+    - user-theme@gnome-shell-extensions.gcampax.github.com
+
+- name: Install gnome themes
+  shell: "cd {{ theme.dest }} && ./install.sh"
+  with_items:
+  loop_control:
+    loop_var: theme
+    label: "{{ theme.name }}"
+  with_items: "{{ gnome_themes }}"
+  when: gnome_theme_download.changed
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  become: true
+  become_user: "{{ user }}"
+  with_items:
+    - ~/Pictures/Wallpapers
+    - ~/Pictures/.activities
+
+- name: Download images
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+  become: true
+  become_user: "{{ user }}"
+  with_items:
+    - url: https://i.redd.it/m8c20gchf7231.jpg
+      dest: ~/Pictures/Wallpapers/catalina.jpg
+    - url: https://p1.hiclipart.com/path/110/758/421/qltdtj7e5qmb53gejfmb7qemoj-a29699a331a190e4c58301a2cca72cbe.png
+      dest: ~/Pictures/.activities/icon.png
+
+- name: Configure desktop theme
+  command: "{{ item }}"
+  become: true
+  become_user: "{{ user }}"
+  with_items:
+    - gsettings set org.gnome.shell.extensions.desktop-icons icon-size 'small'
+    - gsettings set org.gnome.shell.extensions.desktop-icons show-home false
+    - gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
+    - gsettings set org.gnome.settings-daemon.plugins.media-keys search "['<Primary>space']"
+    - gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-light-solid'
+    - gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
+    - gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-light'
+
+    - gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:'
+    
+    - gsettings set org.gnome.desktop.background picture-uri 'file:///home/vagrant/Pictures/Wallpapers/catalina.jpg'
+    - gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/vagrant/Pictures/Wallpapers/catalina.jpg'
+
+    - gsettings set org.gnome.desktop.interface font-name 'Garuda 11'
+    - gsettings set org.gnome.desktop.interface document-font-name 'Garuda 11'
+    - gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Garuda 11'
+
+  # https://github.com/PRATAP-KUMAR/focalgdm3
+- name: Set wallpaper for loginscreen
+  command: "/vagrant/setloginwallpaper.sh /home/{{ user }}/Pictures/Wallpapers/catalina.jpg"
+  become: true
+...

@@ -1,0 +1,88 @@
+---
+- name: install classic apps via snap
+  community.general.snap:
+    name:
+      - code
+      - slack
+      - skype
+    classic: yes
+
+- name: install apps via snap
+  community.general.snap:
+    name:
+      - telegram-desktop
+      - postman
+
+- name: install apt deb packages
+  apt:
+    deb: "{{ item }}"
+  with_items:
+   - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+- name: install apt packages
+  apt:
+    name:
+      - awscli
+      - azure-cli
+      - cmake
+      - docker.io
+      - docker-compose
+      - git
+      - jq
+      - nmap
+      - pkg-config
+      - python3
+      - python3-pip
+      - tree
+      - vagrant
+      # - virtualbox
+      # - virtualbox-ext-pack
+      - vlc
+      - yamllint
+
+- name: install pip packages
+  pip:
+    executable: /usr/bin/pip3
+    name:
+      - ansible
+      - ansible-base
+      - ansible-lint
+      - molecule
+      - molecule-docker
+      - molecule-vagrant
+      - pygments
+...
+
+# curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+# sudo apt-get install apt-transport-https --yes
+# echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+# sudo apt-get update
+# sudo apt-get install helm
+  
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+# echo "deb https://dl.bintray.com/loadimpact/deb stable main" | sudo tee -a /etc/apt/sources.list
+# sudo apt-get update
+# sudo apt-get install k6
+  
+# sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
+# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+# echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+# sudo apt-get update
+# sudo apt-get install -y kubectl
+
+# https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux.tar.gz
+# tar xvzf <file>
+
+# curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+# sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+# sudo apt-get update && sudo apt-get install terraform
+
+  # - google-backup-and-sync
+  # - google-chat
+  # - google-drive-file-stream
+  # - signal
+  # - tunnelblick
+  # - whatsapp
+  # - yubico-authenticator
+  # - zoomus
+  # - "microsoft remote desktop"

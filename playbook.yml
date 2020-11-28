@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  
+  vars_files:
+    - default.config.yml
+    
+  pre_tasks:
+    - name: Install python for Ansible
+      raw: test -e /usr/bin/python3 || (yum install -y python3)
+      changed_when: false
+
+  tasks:
+    - include_tasks: tasks/01-ubuntu-desktop.yml
+    - include_tasks: tasks/02-desktop-theme.yml
+    - include_tasks: tasks/03-gnome-extensions.yml
+    - include_tasks: tasks/04-install-apps.yml
+    - include_tasks: tasks/05-favorite-apps.yml
+...
