@@ -1,3 +1,4 @@
+...
 - name: reset favorites
   shell: "gsettings set org.gnome.shell favorite-apps \"['org.gnome.Nautilus.desktop']\""
   become: true
@@ -10,4 +11,4 @@
   with_items: 
     - google-chrome
     - code_code
-  
+...

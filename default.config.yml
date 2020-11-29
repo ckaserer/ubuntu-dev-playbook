@@ -1,3 +1,4 @@
+---
 user: vagrant
 
 gnome_themes:
@@ -11,21 +12,9 @@ gnome_themes:
     repo: https://github.com/vinceliuice/WhiteSur-icon-theme.git
     dest: /usr/share/themes/source/WhiteSur-icon-theme
 
-gnome_extensions:
-  
-  # # no title bar
-  # - src: https://extensions.gnome.org/extension-data/no-title-bar%40franglais125.gmail.com.v9.shell-extension.zip
-  #   uuid: no-title-bar@franglais125.gmail.com
-  #   schema: true
-  #   setting: no-title-bar
-  #   config: []
+gnome_extensions_path: ~/.local/share/gnome-shell/extensions
 
-  # global application menu
-  - src: https://extensions.gnome.org/extension-data/GnomeGlobalAppMenu_fix_lestcape.v1.shell-extension.zip
-    uuid: GnomeGlobalAppMenu_fix_@lestcape
-    schema: true
-    setting: global-application-menu
-    config: []
+gnome_extensions:
 
   # dash to dock
   - src: https://extensions.gnome.org/extension-data/dash-to-dockmicxgx.gmail.com.v69.shell-extension.zip
@@ -35,25 +24,11 @@ gnome_extensions:
     config:
       - key: preferred-monitor
         value: '0'
-      - key: dock-fixed
-        value: 'false'
-      - key: autohide
-        value: 'true'
-      - key: autohide-in-fullscreen
-        value: 'true'
-      - key: require-pressure-to-show
-        value: 'false'
-      - key: intellihide
-        value: 'false'
-      - key: height-fraction
-        value: '1.0'
+      - key: dock-position
+        value: 'LEFT'
       - key: dash-max-icon-size
         value: '32'
-      - key: extend-height
-        value: 'false'
       - key: show-show-apps-button
-        value: 'false'
-      - key: animate-show-apps
         value: 'false'
       - key: click-action
         value: 'focus-or-previews'
@@ -65,34 +40,12 @@ gnome_extensions:
         value: 'true'
       - key: custom-theme-running-dots-color
         value: '#8caad5'
-      - key: custom-background-color
-        value: 'true'
-      - key: background-color
-        value: '#000000'
-      - key: transparency-mode
-        value: 'FIXED'
-      - key: background-opacity
-        value: '0.2'
-  
-  # auto move windows
-  - src: https://extensions.gnome.org/extension-data/auto-move-windowsgnome-shell-extensions.gcampax.github.com.v43.shell-extension.zip
-    uuid: auto-move-windows@gnome-shell-extensions.gcampax.github.com
-    schema: true
-    setting: auto-move-windows
-    config: []
 
-  # move clock
+  # frippery move clock
   - src: https://extensions.gnome.org/extension-data/Move_Clockrmy.pobox.com.v22.shell-extension.zip
     uuid: Move_Clock@rmy.pobox.com
     schema: true
     setting: move-clock
-    config: []
-
-  # hide activities
-  - src: https://extensions.gnome.org/extension-data/Hide_Activitiesshay.shayel.org.v10.shell-extension.zip
-    uuid: Hide_Activities@shay.shayel.org
-    schema: true
-    setting: hide-activities
     config: []
 
   # panel OSD
@@ -106,13 +59,6 @@ gnome_extensions:
       - key: y-pos
         value: '100.0'
 
-  # laces menu
-  - src: https://extensions.gnome.org/extension-data/places-menugnome-shell-extensions.gcampax.github.com.v47.shell-extension.zip
-    uuid: laces-menu@gnome-shell-extensions.gcampax.github.com
-    schema: true
-    setting: laces-menu
-    config: []
-
   # refresh wifi
   - src: https://extensions.gnome.org/extension-data/refresh-wifikgshank.net.v14.shell-extension.zip
     uuid: refresh-wifi@kgshank.net
@@ -120,13 +66,6 @@ gnome_extensions:
     setting: refresh-wifi
     config: []
 
-  # remove dropdown arrows
-  - src: https://extensions.gnome.org/extension-data/remove-dropdown-arrowsmpdeimos.com.v13.shell-extension.zip
-    uuid: remove-dropdown-arrows@mpdeimos.com
-    schema: true
-    setting: remove-dropdown-arrows
-    config: []
-  
   # status area horizontal spacing
   - src: https://extensions.gnome.org/extension-data/status-area-horizontal-spacingmathematical.coffee.gmail.com.v15.shell-extension.zip
     uuid: status-area-horizontal-spacing@mathematical.coffee.gmail.com
@@ -136,13 +75,15 @@ gnome_extensions:
       - key: hpadding 
         value: '5'
 
-  # steal my focus
-  - src: https://extensions.gnome.org/extension-data/steal-my-focus%40kagesenshi.org.v4.shell-extension.zip
-    uuid: steal-my-focus@kagesenshi.org
+  # no title bar forked
+  - src: https://extensions.gnome.org/extension-data/no-title-barjonaspoehler.de.v5.shell-extension.zip
+    uuid: no-title-bar@jonaspoehler.de
     schema: true
-    setting: steal-my-focus
-    config: []
-  
+    setting: no-title-bar
+    config:
+      - key: buttons-for-all-win
+        value: 'false'
+
   # workspaces to dock
   - src: https://extensions.gnome.org/extension-data/workspaces-to-dockpassingthru67.gmail.com.v53.shell-extension.zip
     uuid: workspaces-to-dock@passingthru67.gmail.com
@@ -150,42 +91,46 @@ gnome_extensions:
     setting: workspaces-to-dock
     config:
       - key: dock-position
-        value: 'TOP'
+        value: 'BOTTOM'
       - key: opaque-background
-        value: 'false'
-      - key: dock-fixed
-        value: 'false'
-      - key: autohide
         value: 'false'
       - key: intellihide
         value: 'false'
+      - key: hide-dash
+        value: 'true'
       - key: workspace-captions
         value: 'false'
       - key: customize-height
         value: 'true'
+      - key: customize-height-option
+        value: '1'
       - key: center-thumbnails-on-dock
         value: 'true'
-      - key: top-margin
-        value: '0.1'
-      - key: bottom-margin
-        value: '0.1'
-  
-  # hidetopbar
-  - src: https://extensions.gnome.org/extension-data/hidetopbarmathieu.bidon.ca.v80.shell-extension.zip
-    uuid: hidetopbar@mathieu.bidon.ca
+      # - key: toggle-dock-with-keyboard-shortcut
+      #   value: "\""['<Primary>Up']\"\""
+
+  # fullscreen workspace
+  - src: https://extensions.gnome.org/extension-data/fullscreenworkspace%40satran.in.v1.shell-extension.zip
+    uuid: fullscreenworkspace@satran.in
     schema: true
-    setting: hidetopbar
-    config:
-      - key: mouse-sensitive
-        value: 'true'
-      - key: mouse-sensitive-fullscreen-window
-        value: 'true'
-      - key: enable-intellihide
-        value: 'true'
-      - key: enable-active-window
-        value: 'false'
-    
-  # activities-config
+    setting: fullscreen-workspace
+    config: []
+
+  # Disable Workspace Switcher Popup
+  - src: https://extensions.gnome.org/extension-data/disable-workspace-switcher-popup%40github.com.v2.shell-extension.zip
+    uuid: disable-workspace-switcher-popup@github.com
+    schema: true
+    setting: disable-workspace-switcher-popup
+    config: []
+
+  # Bluetooth quick connect
+  - src: https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v16.shell-extension.zip
+    uuid: bluetooth-quick-connect@bjarosze.gmail.com
+    schema: true
+    setting: pixel-saver
+    config: []
+
+  # activities configurator
   - src: https://extensions.gnome.org/extension-data/activities-confignls1729.v89.shell-extension.zip
     uuid: activities-config@nls1729
     schema: true
@@ -201,13 +146,6 @@ gnome_extensions:
         value: 'true'
       - key: panel-hide-app-menu-button-icon
         value: 'true'
-
-  # topicons
-  - src: https://extensions.gnome.org/extension-data/TopIconsphocean.net.v27.shell-extension.zip
-    uuid: TopIcons@phocean.net
-    schema: true
-    setting: topicons
-    config: []
 
   # sound-output-device-chooser
   - src: https://extensions.gnome.org/extension-data/sound-output-device-chooserkgshank.net.v32.shell-extension.zip
@@ -229,11 +167,11 @@ gnome_extensions:
       - key: enable-indicator
         value: 'false'
 
-  ###############################
-  # Extensions with idicator
-  # Order relevant for top bar
-  ###############################
-  
+  # ###############################
+  # # Extensions with idicator
+  # # Order relevant for top bar
+  # ###############################
+
   # apt update indicator 
   - src: https://extensions.gnome.org/extension-data/apt-update-indicatorfranglais125.gmail.com.v22.shell-extension.zip
     uuid: apt-update-indicator@franglais125.gmail.com
@@ -285,5 +223,11 @@ gnome_extensions:
     uuid: netspeed@hedayaty.gmail.com
     schema: true
     setting: netspeed
-    config: []
-
+    config:
+      - key: use-bytes
+        value: 'true'
+      - key: label-size
+        value: 34
+      - key: unit-label-size
+        value: 24
+... 

@@ -18,13 +18,14 @@
   register: gnome_theme_download
 
 - name: Enable extensions required for gnome theme
-  shell: "gsettings set org.gnome.shell enabled-extensions \"$(gsettings get org.gnome.shell enabled-extensions | sed s/.$//), '{{ extension }}']\""
+  shell: "gsettings set org.gnome.shell enabled-extensions \"['user-theme@gnome-shell-extensions.gcampax.github.com', 'horizontal-workspaces@gnome-shell-extensions.gcampax.github.com']\""
   become: true
   become_user: "{{ user }}"
-  loop_control:
-    loop_var: extension
-  with_items:
-    - user-theme@gnome-shell-extensions.gcampax.github.com
+
+- name: restart gdm3 for user theme extension
+  service:
+    name: gdm3
+    state: restarted
 
 - name: Install gnome themes
   shell: "cd {{ theme.dest }} && ./install.sh"
@@ -33,7 +34,7 @@
     loop_var: theme
     label: "{{ theme.name }}"
   with_items: "{{ gnome_themes }}"
-  when: gnome_theme_download.changed
+  # when: gnome_theme_download.changed
 
 - name: Create directories
   file:
@@ -66,18 +67,23 @@
     - gsettings set org.gnome.shell.extensions.desktop-icons show-home false
     - gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
     - gsettings set org.gnome.settings-daemon.plugins.media-keys search "['<Primary>space']"
-    - gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-light-solid'
-    - gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur'
-    - gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-light'
+    - gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-dark'
+    - gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
+    - gsettings set org.gnome.shell.extensions.user-theme name 'WhiteSur-dark'
 
     - gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:'
     
-    - gsettings set org.gnome.desktop.background picture-uri 'file:///home/vagrant/Pictures/Wallpapers/catalina.jpg'
-    - gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/vagrant/Pictures/Wallpapers/catalina.jpg'
+    - gsettings set org.gnome.desktop.background picture-uri 'file:///home/{{ user }}/Pictures/Wallpapers/catalina.jpg'
+    - gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/{{ user }}/Pictures/Wallpapers/catalina.jpg'
 
     - gsettings set org.gnome.desktop.interface font-name 'Garuda 11'
     - gsettings set org.gnome.desktop.interface document-font-name 'Garuda 11'
     - gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Garuda 11'
+    
+    - gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
+    - gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
+    - gsettings set org.gnome.desktop.interface clock-show-seconds 'true'
+    - gsettings set org.gnome.desktop.calendar show-weekdate 'true'
 
   # https://github.com/PRATAP-KUMAR/focalgdm3
 - name: Set wallpaper for loginscreen
