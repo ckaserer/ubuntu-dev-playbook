@@ -57,10 +57,10 @@ gnome_desktop_packages:
   - dconf-editor
 
 gnome_theme_packages: []
-  # - sassc 
-  # - optipng 
-  # - inkscape 
-  # - libglib2.0-dev-bin 
+  - sassc 
+  - optipng 
+  - inkscape 
+  - libglib2.0-dev-bin 
 
 gnome_theme_path: /usr/share/themes
 
