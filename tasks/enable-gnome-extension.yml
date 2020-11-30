@@ -1,0 +1,29 @@
+---
+- name: Get enabled extensions
+  shell: "gsettings get org.gnome.shell enabled-extensions"
+  become: true
+  become_user: "{{ user }}"
+  changed_when: false
+  register: enabled_extensions
+
+- name: "Enable {{ enable_extension }} (first extension)"
+  shell: "gsettings set org.gnome.shell enabled-extensions \"['{{ enable_extension }}']\""
+  become: true
+  become_user: "{{ user }}"
+  notify: restart gdm3
+  when: 
+    - "enabled_extensions.stdout.find('@as []') > -1"
+
+- name: "Enable {{ enable_extension }}"
+  shell: "gsettings set org.gnome.shell enabled-extensions \"$(gsettings get org.gnome.shell enabled-extensions | sed s/.$//), '{{ enable_extension }}']\""
+  become: true
+  become_user: "{{ user }}"
+  notify: restart gdm3
+  when: 
+    - "enabled_extensions.stdout.find('@as []') == -1"
+
+# - name: restart gdm3
+#   service:
+#     name: gdm3
+#     state: restarted
+...

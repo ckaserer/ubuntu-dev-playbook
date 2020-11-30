@@ -1,170 +1,331 @@
 ---
 user: vagrant
 
+wallpaper: catalina-5.jpeg
+
+favorites:
+  - google-chrome
+  - code_code
+
+snap_classic_packages:
+  - code
+  - slack
+  - skype
+
+snap_packages:
+  - telegram-desktop
+  - postman
+
+apt_deb_packages:
+  - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+
+apt_packages:
+  - awscli
+  - azure-cli
+  - cmake
+  # - docker.io
+  - git
+  - jq
+  - nmap
+  - pkg-config
+  - python3
+  - python3-pip
+  - tree
+  - vagrant
+  # - virtualbox
+  # - virtualbox-ext-pack
+  - vlc
+  - yamllint
+
+pip_packages:
+  - ansible
+  - ansible-base
+  - ansible-lint
+  - molecule
+  - molecule-docker
+  - molecule-vagrant
+  - pygments
+
+##############################
+# Theme Variables
+##############################
+
+gnome_desktop_packages:
+  - gnome-tweaks
+  - gnome-tweak-tool
+  - gnome-shell-extensions
+  - dconf-editor
+
+gnome_theme_packages: []
+  # - sassc 
+  # - optipng 
+  # - inkscape 
+  # - libglib2.0-dev-bin 
+
+gnome_theme_path: /usr/share/themes
+
 gnome_themes:
   - name: WhiteSur-gtk-theme
     repo: https://github.com/vinceliuice/WhiteSur-gtk-theme.git
-    dest: /usr/share/themes/source/WhiteSur-gtk-theme
+    dest: "{{ gnome_theme_path }}/source/WhiteSur-gtk-theme"
   - name: WhiteSur-kde
     repo: https://github.com/vinceliuice/WhiteSur-kde.git
-    dest: /usr/share/themes/source/WhiteSur-kde
+    dest: "{{ gnome_theme_path }}/source/WhiteSur-kde"
   - name: WhiteSur-icon-theme
     repo: https://github.com/vinceliuice/WhiteSur-icon-theme.git
-    dest: /usr/share/themes/source/WhiteSur-icon-theme
+    dest: "{{ gnome_theme_path }}/source/WhiteSur-icon-theme"
 
-gnome_extensions_path: ~/.local/share/gnome-shell/extensions
+gnome_theme_extensions:
+  - user-theme@gnome-shell-extensions.gcampax.github.com
+  - horizontal-workspaces@gnome-shell-extensions.gcampax.github.com
+
+gnome_theme_images:
+  - src: "files/{{ wallpaper }}"
+    dest: "/home/{{ user }}/Pictures/Wallpapers/{{ wallpaper }}"
+  - src: files/ubuntu.png
+    dest: "{{ gnome_theme_path }}/.ubuntu.png"
+
+gnome_theme_settings:
+  - path: org.gnome.shell.extensions.desktop-icons
+    key: icon-size
+    value: small
+  - path: org.gnome.shell.extensions.desktop-icons
+    key: show-home
+    value: 'false'
+  - path: org.gnome.shell.extensions.desktop-icons
+    key: show-trash
+    value: 'false'
+  - path: org.gnome.settings-daemon.plugins.media-keys
+    key: search
+    value: "['<Primary>space']"
+  - path: org.gnome.desktop.calendar
+    key: show-weekdate 
+    value: 'true'
+  - path: org.gnome.desktop.interface
+    key: show-battery-percentage
+    value: 'true'
+  - path: org.gnome.desktop.interface
+    key: clock-show-weekday
+    value: 'true'
+  - path: org.gnome.desktop.interface
+    key: clock-show-seconds
+    value: 'true'
+  - path: org.gnome.desktop.interface
+    key: gtk-theme
+    value: WhiteSur-dark
+  - path: org.gnome.desktop.interface
+    key: icon-theme
+    value: WhiteSur-dark
+  - path: org.gnome.shell.extensions.user-theme
+    key: name
+    value: WhiteSur-dark
+  - path: org.gnome.desktop.background
+    key:  picture-uri
+    value: "file:///home/{{ user }}/Pictures/Wallpapers/{{ wallpaper }}"
+  - path: org.gnome.desktop.screensaver
+    key:  picture-uri
+    value: "file:///home/{{ user }}/Pictures/Wallpapers/{{ wallpaper }}"
+  - path: org.gnome.desktop.interface
+    key: font-name
+    value: Garuda 11
+  - path: org.gnome.desktop.interface
+    key: font-name
+    value: Garuda 11
+  - path: org.gnome.desktop.wm.preferences
+    key: titlebar-font
+    value: Garuda 11
+  - path: org.gnome.desktop.wm.preferences
+    key: button-layout
+    value: 'close,minimize,maximize:'
+
+gnome_extension_packages:
+  - lm-sensors # freon
+
+gnome_extension_path: ~/.local/share/gnome-shell/extensions
 
 gnome_extensions:
-
   # dash to dock
-  - src: https://extensions.gnome.org/extension-data/dash-to-dockmicxgx.gmail.com.v69.shell-extension.zip
+  - name: dash-to-dock
+    src: https://extensions.gnome.org/extension-data/dash-to-dockmicxgx.gmail.com.v69.shell-extension.zip
     uuid: dash-to-dock@micxgx.gmail.com
-    schema: true
-    setting: dash-to-dock
+    custom_schema: true
     config:
-      - key: preferred-monitor
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: preferred-monitor
         value: '0'
-      - key: dock-position
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: dock-position
         value: 'LEFT'
-      - key: dash-max-icon-size
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: dash-max-icon-size
         value: '32'
-      - key: show-show-apps-button
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: show-show-apps-button
         value: 'false'
-      - key: click-action
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: click-action
         value: 'focus-or-previews'
-      - key: custom-theme-shrink
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: custom-theme-shrink
         value: 'true'
-      - key: running-indicator-style
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: running-indicator-style
         value: 'DOTS'
-      - key: custom-theme-customize-running-dots
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: custom-theme-customize-running-dots
         value: 'true'
-      - key: custom-theme-running-dots-color
+      - path: org.gnome.shell.extensions.dash-to-dock
+        key: custom-theme-running-dots-color
         value: '#8caad5'
 
   # frippery move clock
-  - src: https://extensions.gnome.org/extension-data/Move_Clockrmy.pobox.com.v22.shell-extension.zip
+  - name: move-clock
+    src: https://extensions.gnome.org/extension-data/Move_Clockrmy.pobox.com.v22.shell-extension.zip
     uuid: Move_Clock@rmy.pobox.com
-    schema: true
-    setting: move-clock
+    custom_schema: true
     config: []
 
   # panel OSD
-  - src: https://extensions.gnome.org/extension-data/panel-osdberend.de.schouwer.gmail.com.v39.shell-extension.zip
+  - name: panel-osd
+    src: https://extensions.gnome.org/extension-data/panel-osdberend.de.schouwer.gmail.com.v39.shell-extension.zip
     uuid: panel-osd@berend.de.schouwer.gmail.com
-    schema: true
-    setting: panel-osd
+    custom_schema: true
     config:
-      - key: x-pos
+      - path: org.gnome.shell.extensions.panel-osd
+        key: x-pos
         value: '100.0'
-      - key: y-pos
+      - path: org.gnome.shell.extensions.panel-osd
+        key: y-pos
         value: '100.0'
 
   # refresh wifi
-  - src: https://extensions.gnome.org/extension-data/refresh-wifikgshank.net.v14.shell-extension.zip
+  - name: refresh-wifi
+    src: https://extensions.gnome.org/extension-data/refresh-wifikgshank.net.v14.shell-extension.zip
     uuid: refresh-wifi@kgshank.net
-    schema: true
-    setting: refresh-wifi
+    custom_schema: true
     config: []
 
   # status area horizontal spacing
-  - src: https://extensions.gnome.org/extension-data/status-area-horizontal-spacingmathematical.coffee.gmail.com.v15.shell-extension.zip
+  - name: status-area-horizontal-spacing
+    src: https://extensions.gnome.org/extension-data/status-area-horizontal-spacingmathematical.coffee.gmail.com.v15.shell-extension.zip
     uuid: status-area-horizontal-spacing@mathematical.coffee.gmail.com
-    schema: true
-    setting: status-area-horizontal-spacing
+    custom_schema: true
     config:
-      - key: hpadding 
+      - path: org.gnome.shell.extensions.status-area-horizontal-spacing
+        key: hpadding 
         value: '5'
 
   # no title bar forked
-  - src: https://extensions.gnome.org/extension-data/no-title-barjonaspoehler.de.v5.shell-extension.zip
+  - name: no-title-bar
+    src: https://extensions.gnome.org/extension-data/no-title-barjonaspoehler.de.v5.shell-extension.zip
     uuid: no-title-bar@jonaspoehler.de
-    schema: true
-    setting: no-title-bar
+    custom_schema: true
     config:
-      - key: buttons-for-all-win
+      - path: org.gnome.shell.extensions.no-title-bar
+        key: buttons-for-all-win
         value: 'false'
 
   # workspaces to dock
-  - src: https://extensions.gnome.org/extension-data/workspaces-to-dockpassingthru67.gmail.com.v53.shell-extension.zip
+  - name: workspaces-to-dock
+    src: https://extensions.gnome.org/extension-data/workspaces-to-dockpassingthru67.gmail.com.v53.shell-extension.zip
     uuid: workspaces-to-dock@passingthru67.gmail.com
-    schema: true
-    setting: workspaces-to-dock
+    custom_schema: true
     config:
-      - key: dock-position
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: dock-position
         value: 'BOTTOM'
-      - key: opaque-background
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: opaque-background
         value: 'false'
-      - key: intellihide
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: intellihide
         value: 'false'
-      - key: hide-dash
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: hide-dash
         value: 'true'
-      - key: workspace-captions
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: workspace-captions
         value: 'false'
-      - key: customize-height
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: customize-height
         value: 'true'
-      - key: customize-height-option
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: customize-height-option
         value: '1'
-      - key: center-thumbnails-on-dock
+      - path: org.gnome.shell.extensions.workspaces-to-dock
+        key: center-thumbnails-on-dock
         value: 'true'
-      # - key: toggle-dock-with-keyboard-shortcut
+      # - path: org.gnome.shell.extensions.workspaces-to-dock
+      #   key: toggle-dock-with-keyboard-shortcut
       #   value: "\""['<Primary>Up']\"\""
 
   # fullscreen workspace
-  - src: https://extensions.gnome.org/extension-data/fullscreenworkspace%40satran.in.v1.shell-extension.zip
+  - name: fullscreen-workspace
+    src: https://extensions.gnome.org/extension-data/fullscreenworkspace%40satran.in.v1.shell-extension.zip
     uuid: fullscreenworkspace@satran.in
-    schema: true
-    setting: fullscreen-workspace
+    custom_schema: true
     config: []
 
   # Disable Workspace Switcher Popup
-  - src: https://extensions.gnome.org/extension-data/disable-workspace-switcher-popup%40github.com.v2.shell-extension.zip
+  - name: disable-workspace-switcher-popup
+    src: https://extensions.gnome.org/extension-data/disable-workspace-switcher-popup%40github.com.v2.shell-extension.zip
     uuid: disable-workspace-switcher-popup@github.com
-    schema: true
-    setting: disable-workspace-switcher-popup
+    custom_schema: true
     config: []
 
   # Bluetooth quick connect
-  - src: https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v16.shell-extension.zip
+  - name: pixel-saver
+    src: https://extensions.gnome.org/extension-data/bluetooth-quick-connectbjarosze.gmail.com.v16.shell-extension.zip
     uuid: bluetooth-quick-connect@bjarosze.gmail.com
-    schema: true
-    setting: pixel-saver
+    custom_schema: true
     config: []
 
   # activities configurator
-  - src: https://extensions.gnome.org/extension-data/activities-confignls1729.v89.shell-extension.zip
+  - name: activities-config
+    src: https://extensions.gnome.org/extension-data/activities-confignls1729.v89.shell-extension.zip
     uuid: activities-config@nls1729
-    schema: true
-    setting: activities-config
+    custom_schema: true
     config:
-      - key: activities-config-button-icon-path
-        value: '~/Pictures/.activities/icon.png'
-      - key: activities-icon-scale-factor
+      - path: org.gnome.shell.extensions.activities-config
+        key: activities-config-button-icon-path
+        value: "{{ gnome_theme_path }}/.ubuntu.png"
+      - path: org.gnome.shell.extensions.activities-config
+        key: activities-icon-scale-factor
         value: '1.6'
-      - key: activities-icon-padding
+      - path: org.gnome.shell.extensions.activities-config
+        key: activities-icon-padding
         value: '0'
-      - key: activities-config-button-no-text
+      - path: org.gnome.shell.extensions.activities-config
+        key: activities-config-button-no-text
         value: 'true'
-      - key: panel-hide-app-menu-button-icon
+      - path: org.gnome.shell.extensions.activities-config
+        key: panel-hide-app-menu-button-icon
         value: 'true'
+      - path: org.gnome.shell.extensions.activities-config
+        key: activities-config-hot-corner
+        value: 'false' 
 
   # sound-output-device-chooser
-  - src: https://extensions.gnome.org/extension-data/sound-output-device-chooserkgshank.net.v32.shell-extension.zip
+  - name: sound-output-device-chooser
+    src: https://extensions.gnome.org/extension-data/sound-output-device-chooserkgshank.net.v32.shell-extension.zip
     uuid: sound-output-device-chooser@kgshank.net
-    schema: true
-    setting: sound-output-device-chooser
+    custom_schema: true
     config: []
 
   # screenshot
-  - src: https://extensions.gnome.org/extension-data/gnome-shell-screenshotttll.de.v52.shell-extension.zip
+  - name: screenshot
+    src: https://extensions.gnome.org/extension-data/gnome-shell-screenshotttll.de.v52.shell-extension.zip
     uuid: gnome-shell-screenshot@ttll.de
-    schema: true
-    setting: screenshot
+    custom_schema: true
     config:
-      - key: save-screenshot
+      - path: org.gnome.shell.extensions.screenshot
+        key: save-screenshot
         value: 'true'
-      - key: clipboard-action
+      - path: org.gnome.shell.extensions.screenshot
+        key: clipboard-action
         value: 'set-image-data'
-      - key: enable-indicator
+      - path: org.gnome.shell.extensions.screenshot
+        key: enable-indicator
         value: 'false'
 
   # ###############################
@@ -173,61 +334,73 @@ gnome_extensions:
   # ###############################
 
   # apt update indicator 
-  - src: https://extensions.gnome.org/extension-data/apt-update-indicatorfranglais125.gmail.com.v22.shell-extension.zip
+  - name: apt-update-indicator
+    src: https://extensions.gnome.org/extension-data/apt-update-indicatorfranglais125.gmail.com.v22.shell-extension.zip
     uuid: apt-update-indicator@franglais125.gmail.com
-    schema: true
-    setting: apt-update-indicator
+    custom_schema: true
     config:
-     - key: interval-unit
-       value: 'hours'
-     - key: check-interval
-       value: '4'
-     - key: notify
-       value: 'true'
-     - key: verbosity
-       value: '1'
-     - key: update-cmd-options
-       value: 'custom'
-     - key: use-custom-cmd
-       value: 'true'
-     - key: update-cmd
-       value: "'sudo pkexec apt upgrade -y'"
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: interval-unit
+        value: 'hours'
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: check-interval
+        value: '4'
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: notify
+        value: 'true'
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: verbosity
+        value: '1'
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: update-cmd-options
+        value: 'custom'
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: use-custom-cmd
+        value: 'true'
+      - path: org.gnome.shell.extensions.apt-update-indicator
+        key: update-cmd
+        value: "'sudo pkexec apt upgrade -y'"
 
-  # fqmegh
-  - src: https://extensions.gnome.org/extension-data/fqmegh.v15.shell-extension.zip
+  # force quit
+  - name: fqmegh
+    src: https://extensions.gnome.org/extension-data/fqmegh.v15.shell-extension.zip
     uuid: fq@megh
-    schema: true
-    setting: fqmegh
+    custom_schema: true
     config: []
   
   # caffeine
-  - src: https://extensions.gnome.org/extension-data/caffeinepatapon.info.v37.shell-extension.zip
+  - name: caffeine
+    src: https://extensions.gnome.org/extension-data/caffeinepatapon.info.v37.shell-extension.zip
     uuid: caffeine@patapon.info
-    schema: true
-    setting: caffeine
+    custom_schema: true
     config:
-      - key: enable-fullscreen
+      - path: org.gnome.shell.extensions.caffeine
+        key: enable-fullscreen
         value: 'false'
-      - key: show-notifications
+      - path: org.gnome.shell.extensions.caffeine
+        key: show-notifications
         value: 'false'
 
   # freon
-  - src: https://extensions.gnome.org/extension-data/freonUshakovVasilii_Github.yahoo.com.v43.shell-extension.zip
+  - name: freon
+    src: https://extensions.gnome.org/extension-data/freonUshakovVasilii_Github.yahoo.com.v43.shell-extension.zip
     uuid: freon@UshakovVasilii_Github.yahoo.com
-    schema: true
-    setting: freon
+    custom_schema: true
     config: []
 
   # netspeed
-  - src: https://extensions.gnome.org/extension-data/netspeedhedayaty.gmail.com.v31.shell-extension.zip
+  - name: netspeed
+    src: https://extensions.gnome.org/extension-data/netspeedhedayaty.gmail.com.v31.shell-extension.zip
     uuid: netspeed@hedayaty.gmail.com
-    schema: true
-    setting: netspeed
+    custom_schema: true
     config:
-      - key: use-bytes
+      - path: org.gnome.shell.extensions.netspeed
+        key: use-bytes
         value: 'true'
-      - key: label-size
-        value: 34
-      - key: unit-label-size
-        value: 24
+      - path: org.gnome.shell.extensions.netspeed
+        key: label-size
+        value: '34'
+      - path: org.gnome.shell.extensions.netspeed
+        key: unit-label-size
+        value: '24'
 ... 

@@ -1,0 +1,14 @@
+---
+- name: "Gsettings get {{ setting.path }} {{ setting.key }}"
+  command: "gsettings {{ '--schemadir ' + gnome_extension_path + '/' + extension.uuid + '/schemas' if custom_schema else '' }} get {{ setting.path}} {{ setting.key }}"
+  become: true
+  become_user: "{{ user }}"
+  changed_when: false
+  register: gsettings_value_result
+
+- name: "Gsettings set {{ setting.path }} {{ setting.key }} \"{{ setting.value }}\""
+  command: "gsettings {{ '--schemadir ' + gnome_extension_path + '/' + extension.uuid + '/schemas' if custom_schema else '' }} set {{ setting.path}} {{ setting.key }} \"{{ setting.value }}\""
+  become: true
+  become_user: "{{ user }}"
+  when: not gsettings_value_result.stdout | regex_search( setting.value )
+...

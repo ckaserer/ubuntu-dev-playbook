@@ -1,4 +1,4 @@
-
+---
 - name: Populate service facts
   service_facts:
 
@@ -8,28 +8,19 @@
     update_cache: true
     cache_valid_time: 3600
 
-- name: Install ubuntu desktop
+- name: Install gnome desktop
   shell: setsid sh -c 'exec tasksel install ubuntu-desktop <> /dev/tty2 >&0 2>&1' 
   vars:
     ANSIBLE_SSH_PIPELINING: false
   when: ansible_facts.services['gdm3.service'] is not defined
 
-- name: Enable gdm3
-  service:
-    name: gdm3
-    enabled: true
-
-- name: Install additional gnome packages
+- name: Install additional gnome desktop packages
   apt:
-    name:
-      - gnome-tweaks
-      - gnome-tweak-tool
-      - gnome-shell-extensions
-      - dconf-editor
+    name: "{{ gnome_desktop_packages }}"
 
-- name: Restart gdm3
+- name: Start and enable gdm3
   service:
     name: gdm3
-    state: restarted
-  when: ansible_facts.services['gdm3.service'] is not defined
-
+    state: started
+    enabled: true
+...

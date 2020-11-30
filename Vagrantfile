@@ -42,26 +42,4 @@ Vagrant.configure("2") do |config|
     ansible.galaxy_role_file = "/vagrant/requirements.yml"
     ansible.playbook = "/vagrant/playbook.yml"
   end
-
-  # config.vm.provision "theme", type: "ansible_local" do |ansible|
-  #   ansible.install_mode = "pip"
-  #   ansible.playbook = "/vagrant/theme.yml"
-  # end
-
-  # config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
-
-  # config.vm.provision "fix-no-tty", type: "shell" do |s|
-  #   s.privileged = false
-  #   s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
-  # end
-  
-  # config.vm.provision "ubuntu-desktop", type: "shell" do |s|
-  #   s.privileged = true
-  #   s.path = "install.sh"
-  # end
-
-  # config.vm.provision "ansible_local" do |ansible|
-  #   ansible.galaxy_role_file = "/vagrant/requirements.yml"
-  #   ansible.playbook = "/vagrant/playbook2.yml"
-  # end
 end

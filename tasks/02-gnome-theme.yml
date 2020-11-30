@@ -1,0 +1,67 @@
+---
+- name: Create theme directories
+  file:
+    path: "{{ item.dest | dirname }}"
+    state: directory
+  become: true
+  become_user: "{{ user }}"
+  loop_control:
+    loop_var: item
+    label: "{{ item.dest | dirname }}"
+  with_items: "{{ gnome_theme_images }}"
+
+- name: Install gnome theme dependecies
+  apt: 
+    name: "{{ gnome_theme_packages }}"
+
+# - name: Locate installed gnome themes
+#   find:
+#     paths: "{{ gnome_theme_path }}"
+#     recurse: no
+#     file_type: directory
+#   register: installed_gnome_themes_result
+
+- name: Install gnome themes
+  include_tasks: tasks/02.1-install-theme.yml
+  loop_control:
+    loop_var: theme
+    label: "{{ theme.name }}"
+  with_items: "{{ gnome_themes }}"
+
+- name: Get enabled extensions
+  shell: "gsettings get org.gnome.shell enabled-extensions"
+  become: true
+  become_user: "{{ user }}"
+  changed_when: false
+  register: enabled_extensions
+
+- name: Enable extensions for custom user theme
+  include_tasks: tasks/enable-gnome-extension.yml
+  loop_control:
+    loop_var: enable_extension
+  with_items: "{{ gnome_theme_extensions }}"
+  when:
+    - "enabled_extensions.stdout.find( enable_extension ) == -1"
+
+- name: Download theme images
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ user }}"
+    mode: "0666"
+  with_items: "{{ gnome_theme_images }}"
+
+- name: Configure gnome settings
+  include_tasks: tasks/configure-gsettings.yml
+  loop_control:
+    loop_var: setting
+    label: "{{ setting.path }} {{ setting.key }}"
+  vars:
+    custom_schema: false
+  with_items: "{{ gnome_theme_settings }}"
+
+# https://github.com/PRATAP-KUMAR/focalgdm3
+- name: Set wallpaper for loginscreen
+  script: 
+    cmd: "./setloginwallpaper.sh /home/{{ user }}/Pictures/Wallpapers/catalina.jpg"
+...

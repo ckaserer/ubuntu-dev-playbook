@@ -1,0 +1,11 @@
+---
+- name: Download gnome theme {{ theme.name }}
+  git:
+    repo: "{{ theme.repo }}"
+    dest: "{{ theme.dest }}"
+  register: download_gnome_theme_result
+
+- name: Install gnome theme {{ theme.name }}
+  shell: "cd {{ theme.dest }} && ./install.sh"
+  when: download_gnome_theme_result.changed
+...

@@ -1,14 +1,22 @@
-...
-- name: reset favorites
+---
+- name: Get favorites
+  shell: "gsettings get org.gnome.shell favorite-apps"
+  become: true
+  become_user: "{{ user }}"
+  changed_when: false
+  register: favorites_result
+
+- name: Reset favorites
   shell: "gsettings set org.gnome.shell favorite-apps \"['org.gnome.Nautilus.desktop']\""
   become: true
   become_user: "{{ user }}"
+  with_items: "{{ favorites }}"
+  when: item not in favorites_result.stdout 
 
-- name:
+- name: Set favorites
   shell: "gsettings set org.gnome.shell favorite-apps \"$(gsettings get org.gnome.shell favorite-apps | sed s/.$//), '{{ item }}.desktop']\""
   become: true
   become_user: "{{ user }}"
-  with_items: 
-    - google-chrome
-    - code_code
+  with_items: "{{ favorites }}"
+  when: item not in favorites_result.stdout 
 ...

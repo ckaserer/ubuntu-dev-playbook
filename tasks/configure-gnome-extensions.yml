@@ -1,9 +1,0 @@
----
-- name: "Configure {{ extension.setting }}"
-  command: "gsettings {{ '--schemadir ' + gnome_extensions_path + '/' + extension.uuid + '/schemas' if extension.schema else '' }} set org.gnome.shell.extensions.{{ extension.setting}} {{ item.key }} {{ item.value }}"
-  become: true
-  become_user: "{{ user }}"
-  loop_control:
-    label: "{{ item.key }}: {{ item.value }}"
-  with_items: "{{ extension.config }}"
-...

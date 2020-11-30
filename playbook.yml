@@ -11,13 +11,24 @@
       changed_when: false
 
   tasks:
-    - include_tasks: tasks/01-ubuntu-desktop.yml
-    - name: disable all gnome extensions
-      shell: "gsettings set org.gnome.shell enabled-extensions \"@as []\""
-      become: true
-      become_user: "{{ user }}"
-    - include_tasks: tasks/02-desktop-theme.yml
-    - include_tasks: tasks/03-gnome-extensions.yml
+    - include_tasks: tasks/01-gnome-desktop.yml
+    - include_tasks: tasks/02-gnome-theme.yml
+    - name: Install gnome extension dependencies
+      apt: 
+        name: "{{ gnome_extension_packages }}"
+    - name: Run sensor detect for freon extension
+      command: sensors-detect --auto
+    - include_tasks: tasks/03-gnome-extension.yml
+      loop_control:
+        loop_var: extension
+        label: "{{ extension.name }}"
+      with_items: "{{ gnome_extensions }}"
     - include_tasks: tasks/04-install-apps.yml
     - include_tasks: tasks/05-favorite-apps.yml
+
+  handlers:
+    - name: restart gdm3
+      service:
+        name: gdm3
+        state: restarted
 ...
