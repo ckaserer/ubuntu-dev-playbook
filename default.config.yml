@@ -56,7 +56,8 @@ gnome_desktop_packages:
   - gnome-shell-extensions
   - dconf-editor
 
-gnome_theme_packages: []
+gnome_theme_packages:
+  # required by https://github.com/vinceliuice/WhiteSur-gtk-theme
   - sassc 
   - optipng 
   - inkscape 
