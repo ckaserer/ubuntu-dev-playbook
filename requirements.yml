@@ -1,6 +1,7 @@
 ---
 roles: []
   # - ckaserer.bashrc
+  # - ckaserer.remote-desktop
 
 collections:
   - name: community.general

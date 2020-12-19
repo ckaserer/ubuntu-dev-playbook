@@ -6,30 +6,64 @@ wallpaper: catalina-5.jpeg
 favorites:
   - google-chrome
   - code_code
+  # slack
+  # whatsapp
 
 snap_classic_packages:
   - code
-  - slack
   - skype
+  - slack
 
 snap_packages:
-  - telegram-desktop
   - postman
+  - telegram-desktop
+  - whatsapp-for-linux
+  - yubioath-desktop
+
+apt_keys:
+  - https://baltocdn.com/helm/signing.asc # helm
+  - https://bintray.com/user/downloadSubjectPublicKey?username=bintray # k6
+  - https://packages.cloud.google.com/apt/doc/apt-key.gpg # kubectl
+  - https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key # podman
+  - https://updates.signal.org/desktop/apt/keys.asc # signal
+  - https://apt.releases.hashicorp.com/gpg # terraform
+
+apt_repos:
+  - "deb https://baltocdn.com/helm/stable/debian/ all main" # helm
+  - "deb https://dl.bintray.com/loadimpact/deb stable main" # k6
+  - "deb https://apt.kubernetes.io/ kubernetes-xenial main" # kubectl # focal does not exist - yet
+  - "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /" # podman
+  - "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" # signal
+  - "deb [arch=amd64] https://apt.releases.hashicorp.com focal main" # terraform
 
 apt_deb_packages:
-  - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+  - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" # chrome
+  - https://download.wavebox.app/stable/linux/deb/amd64/wavebox_10.0.378-2_amd64.deb # wavebox
+  - https://zoom.us/client/latest/zoom_amd64.deb # zoom.us
 
 apt_packages:
+  - apt-transport-https
   - awscli
   - azure-cli
+  - baobab
   - cmake
+  - curl
   # - docker.io
   - git
+  - gnupg2
+  - helm
   - jq
+  - kubectl
+  - libreoffice-gnome 
+  - libreoffice
   - nmap
   - pkg-config
+  - podman
   - python3
   - python3-pip
+  - signal-desktop
+  - terraform
+  - tightvncserver
   - tree
   - vagrant
   # - virtualbox
@@ -45,6 +79,9 @@ pip_packages:
   - molecule-docker
   - molecule-vagrant
   - pygments
+
+remote_archive_apps:
+  - https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux.tar.gz # oc cli
 
 ##############################
 # Theme Variables

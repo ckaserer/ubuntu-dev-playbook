@@ -26,6 +26,9 @@
     - include_tasks: tasks/04-install-apps.yml
     - include_tasks: tasks/05-favorite-apps.yml
 
+  # roles:
+  #   - ckaserer.remote_desktop
+
   handlers:
     - name: restart gdm3
       service:

@@ -2,3 +2,4 @@
 roles/
 *.log
 files/catalina-*.jpeg
+hosts.ini

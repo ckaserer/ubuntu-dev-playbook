@@ -5,6 +5,7 @@
 $CPU = 4
 $MEMORY = 4096
 $VRAM = 256
+$IP = "192.168.0.5"   # does not work with hyper-v # https://www.vagrantup.com/docs/hyperv/limitations.html
 $CPUEXECUTIONCAP = 100 # does not work with hyper-v
 $BASEOS = "ubuntu/focal64"
 #########################
@@ -29,6 +30,8 @@ Vagrant.configure("2") do |config|
     v.memory = $MEMORY
     v.cpus = $CPU
   end
+  
+  config.vm.network "private_network", ip: $IP
   
   config.vm.synced_folder ".", "/vagrant"
 
